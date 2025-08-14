@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Texto a Imagen | Oasis</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      transition: background-image 0.5s ease-in-out;
+    }
+
+    /* Capa oscura para mejor contraste */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.45);
+      z-index: -1;
+    }
+
+    .contenedor {
+      width: 100%;
+      max-width: 650px;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      text-align: center;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      animation: fadeIn 0.5s ease-in-out;
+      color: white;
+    }
+
+    h1 {
+      color: #ff9900;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    p.subtitulo {
+      color: #ddd;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      margin-bottom: 20px;
+      resize: none;
+      outline: none;
+    }
+
+    button {
+      padding: 14px 24px;
+      background: linear-gradient(135deg, #e47911, #ff9900);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(228,121,17,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(228,121,17,0.5);
+    }
+
+    #imagen-generada {
+      margin-top: 30px;
+      max-width: 100%;
+      border-radius: 12px;
+      display: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    #loading {
+      display: none;
+      margin-top: 20px;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    /* Loader animado */
+    .spinner {
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top: 4px solid #ff9900;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      animation: spin 1s linear infinite;
+      margin: 15px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contenedor">
+    <h1>🧠 Texto a Imagen</h1>
+    <p class="subtitulo">Escribe lo que quieres y genera una imagen única con IA.</p>
+    <textarea id="prompt" rows="4" placeholder="Ejemplo: una sala moderna con sofá blanco, plantas y luz natural"></textarea>
+    <br>
+    <button onclick="generarImagen()">Generar Imagen</button>
+    <div id="loading">
+      <div class="spinner"></div>
+      Generando imagen...
+    </div>
+    <img id="imagen-generada" src="" alt="Imagen generada por IA" />
+  </div>
+
+  <script>
+    // Lista de fondos modernos y futuristas
+    const fondos = [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1600585154516-8b9f95bbf2d3?auto=format&fit=crop&w=1920&q=80"
+    ];
+
+    // Elegir fondo aleatorio
+    document.body.style.backgroundImage = `url(${fondos[Math.floor(Math.random() * fondos.length)]})`;
+
+    async function generarImagen() {
+      const prompt = document.getElementById('prompt').value.trim();
+      if (!prompt) return alert("Por favor escribe una descripción.");
+
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('imagen-generada').style.display = 'none';
+
+      try {
+        const res = await fetch("https://oasis-backend-9rgy.onrender.com/texto-imagen", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt })
+        });
+
+        if (!res.ok) throw new Error("Error al generar la imagen");
+
+        const data = await res.json();
+        const img = document.getElementById("imagen-generada");
+        img.src = data.imagenGenerada;
+        img.style.display = 'block';
+
+      } catch (err) {
+        alert("Hubo un error: " + err.message);
+      } finally {
+        document.getElementById('loading').style.display = 'none';
+      }
+    }
+  </script>
+
+</body>
+</html>

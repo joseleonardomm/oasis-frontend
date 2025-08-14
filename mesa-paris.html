@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesa Milano | Oasis</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* TODO EL CSS AQUÍ DENTRO */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #232f3e;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 5px;
+    }
+
+    .sidebar {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 180px;
+      height: 100vh;
+      background-color: #131a22;
+      color: white;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .sidebar.visible {
+      display: block;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .sidebar ul li a:hover {
+      color: #e47911;
+    }
+
+    .logo {
+      display: block;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    header {
+      background-color: #232f3e;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    header .logo img {
+      height: 70px;
+    }
+
+    .producto-detalle {
+      max-width: 1000px;
+      margin: 80px auto 20px auto;
+      padding: 20px;
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .galeria {
+      flex: 1;
+    }
+
+    .galeria img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .descripcion {
+      flex: 1;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .descripcion h1 {
+      font-size: 24px;
+      color: #232f3e;
+      margin-bottom: 15px;
+    }
+
+    .descripcion p {
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .whatsapp {
+      display: block;
+      width: max-content;
+      margin: 30px auto;
+      padding: 12px 24px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .whatsapp:hover {
+      background-color: #1ebe59;
+    }
+
+    .volver {
+      text-align: center;
+      margin: 40px 0 20px 0;
+    }
+
+    .boton-naranja {
+      background-color: #ff9900;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .boton-naranja:hover {
+      background-color: #e47911;
+    }
+
+    .carrusel-container {
+      position: relative;
+      max-width: 600px;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 10px;
+      aspect-ratio: 4 / 3;
+      background-color: #f3f3f3;
+    }
+
+    .carrusel {
+      display: flex;
+      transition: transform 0.5s ease;
+      height: 100%;
+    }
+
+    .carrusel img {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+
+    .carrusel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 153, 0, 0.9);
+      border: none;
+      color: white;
+      font-size: 30px;
+      padding: 8px 14px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 10;
+      transition: background-color 0.3s ease;
+    }
+
+    .carrusel-btn:hover {
+      background-color: #e47911;
+    }
+
+    .carrusel-izq {
+      left: 10px;
+    }
+
+    .carrusel-der {
+      right: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .producto-detalle {
+        flex-direction: column;
+        padding: 10px;
+        margin-top: 60px;
+      }
+
+      .descripcion {
+        padding: 15px;
+      }
+
+      .descripcion h1 {
+        font-size: 20px;
+        text-align: center;
+      }
+
+      .whatsapp {
+        width: 100%;
+        text-align: center;
+      }
+
+      .volver {
+        margin-top: 20px;
+        padding: 0 15px;
+      }
+
+      .carrusel-container {
+        max-width: 100%;
+        border-radius: 0;
+      }
+
+      .carrusel-btn {
+        font-size: 24px;
+        padding: 6px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="menu-toggle" onclick="toggleSidebar()">
+    <div></div><div></div><div></div>
+  </button>
+
+  <aside class="sidebar">
+    <h2>Menú Rápido</h2>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="mesas-de-noche.html">Categoría</a></li>
+    </ul>
+  </aside>
+
+  <header>
+    <a href="index.html" class="logo"><img src="img/logo.png" alt="Oasis Logo"></a>
+  </header>
+
+  <main class="producto-detalle">
+    <div class="carrusel-container">
+  <div class="carrusel" id="carrusel">
+    <img src="img/paris1-1.jpg" alt="Mesa Milano 1" />
+    <img src="img/paris1-2.jpg" alt="Mesa Milano 2" />
+  </div>
+
+  <!-- Flecha izquierda -->
+  <button class="carrusel-btn carrusel-izq" onclick="moverCarrusel(-1)">‹</button>
+
+  <!-- Flecha derecha -->
+  <button class="carrusel-btn carrusel-der" onclick="moverCarrusel(1)">›</button>
+</div>
+    <div class="descripcion">
+      <h1>Mesa de Noche: París</h1>
+      <p><strong>Material:</strong> MDF Melaminico</p>
+      <p><strong>Colores:</strong> Negro con Nogal / Blanco con Nogal</p>
+      <p><strong>Medidas:</strong> 50cm de altura x 45cm de ancho x 35cm de profundidad</p>
+      <p><strong>Peso Apróximado:</strong> 9,50kg</p>
+      <p><strong>Descripción:</strong> Mesa de noche moderna con terminación en blanco, negro y nogal. Ideal para espacios con diseños minimalistas. Incluye el kit de instalación</p>
+      <p><strong>Precio del producto:</strong> $60,00REF</p>
+      <p><strong>Este artículo cuenta con envíos a todo el país por las siguientes agencias:</strong> MRW, Zoom o Tealca</p>  
+      <a class="whatsapp" href="https://wa.me/584220040388" target="_blank">Realizar compra por WhatsApp</a>
+    </div>
+  </main>
+
+  <div class="volver">
+    <a href="mesas-de-noche.html" class="boton-naranja">Volver a la categoría</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Oasis</p>
+  </footer>
+<script>
+  let posicion = 0;
+
+  function moverCarrusel(direccion) {
+    const carrusel = document.getElementById('carrusel');
+    const total = carrusel.children.length;
+    const width = carrusel.clientWidth;
+
+    posicion = (posicion + direccion + total) % total;
+
+    carrusel.style.transform = `translateX(-${posicion * width}px)`;
+  }
+</script>
+</body>
+</html>

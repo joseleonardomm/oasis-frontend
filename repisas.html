@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centros de Entretenimiento | Oasis</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #232f3e;
+      padding-left: 200px;
+    }
+
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 5px;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 180px;
+      height: 100vh;
+      background-color: #131a22;
+      color: white;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .sidebar ul li a:hover {
+      color: #e47911;
+    }
+
+    .logo {
+      display: block;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .logo img {
+      height: 200px;
+    }
+
+    header {
+      background-color: #232f3e;
+      padding: 10px;
+      text-align: center;
+    }
+
+    header .logo img {
+      height: 200px;
+    }
+
+    .categoria-productos {
+      padding: 40px;
+      background-color: #ffffff;
+      min-height: 100vh;
+    }
+
+    .categoria-productos h1 {
+      margin-bottom: 30px;
+      text-align: center;
+      color: #232f3e;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .producto-item {
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .producto-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .producto-item h3 {
+      color: #232f3e;
+      margin-bottom: 10px;
+    }
+
+    .producto-item p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .boton-naranja {
+      background-color: #e47911;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .boton-naranja:hover {
+      background-color: #ff9900;
+    }
+
+    .volver {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    footer {
+      background-color: #131a22;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      body {
+        padding-left: 0;
+      }
+
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 0;
+      }
+
+      .sidebar ul li {
+        margin: 5px;
+      }
+
+      header .logo img {
+        height: 60px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+      }
+
+      .producto-item img {
+        height: auto;
+        max-height: 220px;
+      }
+
+      .categoria-productos {
+        padding: 20px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+ <aside class="sidebar">
+ <div style="text-align: center; margin-bottom: 20px;">
+  <img src="img/logo.png" alt="Oasis Logo" style="height: 60px; max-width: 100%;">
+</div>
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="mesas-de-noche.html">Mesas de Noche</a></li>
+    <li><a href="repisas.html">Repisas</a></li>
+    <li><a href="entretenimiento.html">Centros de Entretenimiento</a></li>
+    <li><a href="pisos.spc.html">Pisos SPC</a></li>
+    <li><a href="plantas.html">Decoración con Plantas</a></li>
+    <li><a href="index.html">Calcula tu Envío</a></li>
+    <li><a href="index.html">Diseño con IA</a></li>
+    <li><a href="index.html">Contacto</a></li>
+  </ul>
+</aside>
+
+  <header>
+    <a href="index.html" class="logo"><img src="img/logo.png" alt="Oasis Logo"></a>
+  </header>
+
+  <main class="categoria-productos">
+    <h1>Repisas Decorativas</h1>
+    <div class="grid">
+      <div class="producto-item">
+        <img src="img/repisa1.jpg" alt="Mesa 1">
+        <div class="producto-info">
+          <h3>Juego de Repisas Flotantes</h3>
+          <p>Incluye su kit de instalación.</p>
+          <a href="repisas-flotantes.html" class="boton-naranja">Ver detalles</a>
+        </div>
+      </div>
+
+      <div class="producto-item">
+        <img src="img/repisa2.jpg" alt="Mesa 2">
+        <div class="producto-info">
+          <h3>Repisa en Madera Natural</h3>
+          <p>En madera natural. Incluye el kit de instalación.</p>
+          <a href="repisas-natural.html" class="boton-naranja">Ver detalles</a>
+        </div>
+      </div>
+
+<div class="producto-item">
+        <img src="img/repisa3.jpg" alt="Mesa 2">
+        <div class="producto-info">
+          <h3>Repisas para TV</h3>
+          <p>Fabricada en madera natural. Incluye le kit de instalación.</p>
+          <a href="repisa-tv.html" class="boton-naranja">Ver detalles</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="volver">
+      <a href="index.html" class="boton-naranja">Volver al menú principal</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Oasis</p>
+  </footer>
+</body>
+</html>

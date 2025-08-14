@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ruleta | Premios Oasis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .contenedor {
+      padding: 40px;
+    }
+
+    .contenedor-ruleta {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 40px auto;
+    }
+
+    #ruleta-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    #flecha {
+      position: absolute;
+      top: -25px;
+      left: calc(50% - 15px);
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 20px solid #e47911;
+      z-index: 10;
+    }
+
+    button {
+      background-color: #e47911;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    #resultado {
+      margin-top: 30px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .modal-contenido {
+      background: #fff;
+      padding: 30px;
+      max-width: 400px;
+      border-radius: 12px;
+      text-align: left;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .modal-contenido h2 {
+      margin-top: 0;
+      color: #e47911;
+    }
+
+    .tabla-premios {
+      margin: 20px 0;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .tabla-premios td {
+      padding: 6px 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .tabla-premios td:first-child {
+      font-weight: bold;
+      width: 30px;
+    }
+
+    .oculto {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Modal de bienvenida -->
+  <div id="modal" class="modal">
+    <div class="modal-contenido">
+      <h2>🎁 Premios disponibles</h2>
+      <table class="tabla-premios">
+        <tr><td>1</td><td>Descuento del 10%</td></tr>
+        <tr><td>2</td><td>Descuento del 20%</td></tr>
+        <tr><td>3</td><td>Un posavaso gratis</td></tr>
+        <tr><td>4</td><td>Regalo sorpresa</td></tr>
+        <tr><td>5</td><td>Descuento del 30%</td></tr>
+        <tr><td>6</td><td>Accesorio para el hogar</td></tr>
+        <tr><td>7</td><td>Descuento del 50%</td></tr>
+        <tr><td>8</td><td>¡Una mesa de noche gratis! 🎉</td></tr>
+      </table>
+      <button onclick="iniciarJuego()">Pagar $3 y Jugar</button>
+    </div>
+  </div>
+
+  <div class="contenedor">
+    <h1>🌀 Gira la ruleta y gana</h1>
+
+    <div class="contenedor-ruleta">
+      <div id="flecha"></div>
+      <img id="ruleta-img" src="img/ruleta.png" alt="Ruleta" />
+    </div>
+
+    <button id="boton-girar" onclick="girar()" class="oculto">Girar</button>
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    const premios = 8;
+    const anguloPorPremio = 360 / premios;
+    let girando = false;
+
+    function iniciarJuego() {
+      document.getElementById("modal").style.display = "none";
+      document.getElementById("boton-girar").classList.remove("oculto");
+    }
+
+    function girar() {
+      if (girando) return;
+      girando = true;
+
+      const vueltas = Math.floor(Math.random() * 3 + 4);
+      const gradoFinal = Math.floor(Math.random() * 360);
+      const rotacion = vueltas * 360 + gradoFinal;
+
+      document.getElementById("ruleta-img").style.transform = `rotate(${rotacion}deg)`;
+
+      setTimeout(() => {
+        const index = Math.floor((360 - (gradoFinal % 360)) / anguloPorPremio) % premios;
+        const numero = index + 1;
+        document.getElementById("resultado").innerText = `Ganaste el número: ${numero}`;
+        girando = false;
+      }, 4500);
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oasis - Catálogo</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #232f3e;
+      padding-left: 200px;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100vh;
+      background-color: #131a22;
+      color: white;
+      padding: 20px 15px;
+      z-index: 1000;
+      overflow-y: auto;
+      border-right: 1px solid #333;
+    }
+
+    .sidebar img {
+      display: block;
+      margin: 0 auto 20px;
+      max-height: 100px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin: 12px 0;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      display: block;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .sidebar ul li a:hover {
+      color: #e47911;
+      background-color: #ff9900;
+    }
+
+    header {
+      background-color: #232f3e;
+      padding: 10px 0;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header .logo img {
+      height: 200px;
+      object-fit: contain;
+    }
+
+    .categorias {
+      padding: 40px;
+      background-color: #f3f3f3;
+    }
+
+    .categorias h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .categoria {
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      text-align: center;
+    }
+
+    .categoria img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .categoria:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 15px rgba(255, 119, 0, 0.4);
+      border-color: #e47911;
+    }
+
+    .categoria::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      font-size: 16px;
+      padding: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .categoria:hover::after {
+      opacity: 1;
+    }
+
+    .info-section {
+      padding: 50px;
+      text-align: center;
+      background-color: #fff;
+    }
+
+    .boton-naranja {
+      background-color: #e47911;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .boton-naranja:hover {
+      background-color: #ff9900;
+      transform: scale(1.05);
+    }
+
+    .proximamente {
+      background-color: #232f3e;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 40px;
+      border-radius: 10px;
+    }
+
+    .hover-emoji {
+      font-size: 30px;
+    }
+
+    .contacto {
+      padding: 40px;
+      background-color: #f8f8f8;
+      text-align: center;
+    }
+
+    footer {
+      background-color: #131a22;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-left: 0;
+      }
+
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px;
+      }
+
+      .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+      }
+
+      header .logo img {
+        height: 70px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+      }
+
+      .categoria img {
+        height: 180px;
+        object-fit: cover;
+      }
+
+      .info-section {
+        padding: 30px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <img src="img/logo.png" alt="Oasis Logo">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="mesas-de-noche.html">Mesas de Noche</a></li>
+      <li><a href="repisas.html">Repisas</a></li>
+      <li><a href="entretenimiento.html">Centros de Entretenimiento</a></li>
+      <li><a href="pisos.spc.html">Pisos SPC</a></li>
+      <li><a href="plantas.html">Decoración con Plantas</a></li>
+      <li><a href="index.html">Calcula tu Envío</a></li>
+      <li><a href="diseno-ia.html">Diseño con IA</a></li>
+      <li><a href="index.html">Contacto</a></li>
+    </ul>
+  </aside>
+
+  <header>
+    <a href="index.html" class="logo">
+      <img src="img/logo.png" alt="Oasis Logo">
+    </a>
+  </header>
+
+  <main>
+    <section id="categorias" class="categorias">
+      <h2>Categorías de Muebles</h2>
+      <div class="grid">
+        <a href="mesas-de-noche.html" class="categoria" data-label="Mesas de Noche">
+          <img src="img/mesas-de-noche.jpg" alt="Mesas de noche">
+        </a>
+        <a href="repisas.html" class="categoria" data-label="Repisas">
+          <img src="img/repisa1.jpg" alt="Repisas">
+        </a>
+        <a href="entretenimiento.html" class="categoria" data-label="Centros de Entretenimiento">
+          <img src="img/entretenimiento.jpg" alt="Centros de Entretenimiento">
+        </a>
+        <a href="pisos.spc.html" class="categoria" data-label="Pisos SPC">
+          <img src="img/spc.jpg" alt="Pisos SPC">
+        </a>
+        <a href="plantas.html" class="categoria" data-label="Decoración con Plantas">
+          <img src="img/plantas.jpg" alt="Decoración con Plantas">
+        </a>
+        <a href="mesas-escritorio.html" class="categoria" data-label="Mesas y Escritorios">
+          <img src="img/escritorio-portada.jpg" alt="Mesas y Escritorios">
+        </a>
+      </div>
+    </section>
+
+    <section id="envios" class="info-section">
+  <h2 style="margin-bottom: 30px;">📦 Calcula tu costo de envío</h2>
+  <form id="form-envio" onsubmit="event.preventDefault(); calcularEnvio();" style="max-width: 500px; margin: auto; background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    
+    <label for="ciudad" style="display:block; margin-bottom: 10px; font-weight: bold;">Selecciona tu ciudad:</label>
+    <select id="ciudad" required style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 6px; border: 1px solid #ccc;">
+      <option value="">-- Elige una ciudad --</option>
+      <option value="valencia">Valencia</option>
+      <option value="maracay">Maracay</option>
+      <option value="caracas">Caracas</option>
+      <option value="barquisimeto">Barquisimeto</option>
+      <option value="maracaibo">Maracaibo</option>
+      <option value="maturin">Maturín</option>
+      <option value="puerto la cruz">Puerto La Cruz</option>
+    </select>
+
+    <label for="producto" style="display:block; margin-bottom: 10px; font-weight: bold;">Selecciona el tipo de producto:</label>
+    <select id="producto" required style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 6px; border: 1px solid #ccc;">
+      <option value="">-- Tipo de producto --</option>
+      <option value="mesa">Mesa</option>
+      <option value="repisas">Repisa</option>
+      <option value="centro">Centro de entretenimiento</option>
+      <option value="planta">Decoración con planta</option>
+      <option value="piso">Piso SPC</option>
+    </select>
+
+    <button type="submit" class="boton-naranja" style="width: 100%;">Calcular Envío</button>
+  </form>
+
+  <div id="resultado-envio" style="margin-top: 25px; font-weight: bold; font-size: 18px; color: #232f3e; text-align: center;"></div>
+</section>
+
+      <a href="diseno-ia.html" style="text-decoration: none;">
+  <section id="ia" class="proximamente" style="transition: background-color 0.3s ease; cursor: pointer; background-color: #1a73e8;">
+    <h2>🧠 Diseño con IA</h2>
+    <p>Transforma tus espacios con inteligencia artificial en segundos.</p>
+    <button class="boton-naranja" style="margin-top: 15px;">Probar ahora</button>
+  </section>
+</a>
+
+<style>
+  #ia:hover {
+    background-color: #1557b0;
+  }
+</style>
+
+    <section id="contacto" class="contacto">
+      <h2>Información de la empresa</h2>
+      <p><strong>Showroom:</strong> San Diego, Edo. Carabobo</p>
+      <p><strong>Teléfono:</strong> 0422-0040388</p>
+      <p><strong>RRSS:</strong> oasisve_</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Oasis. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Botón WhatsApp flotante -->
+  <a href="https://wa.me/584220040388" target="_blank" style="position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; border-radius: 50%; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; font-size: 30px; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); text-decoration: none;">
+    💬
+  </a>
+
+  <script>
+  function calcularEnvio() {
+    const ciudad = document.getElementById("ciudad").value.toLowerCase();
+    const producto = document.getElementById("producto").value.toLowerCase();
+
+    const baseCiudad = {
+      "valencia": 5,
+      "maracay": 15,
+      "caracas": 25,
+      "barquisimeto": 25,
+      "maracaibo": 30,
+      "maturin": 35,
+      "puerto la cruz": 35
+    };
+
+    const factorProducto = {
+      "mesa": 1,
+      "repisas": 0.5,
+      "centro": 1,
+      "planta": 0.5,
+      "piso": 1
+    };
+
+    if (!baseCiudad[ciudad] || !factorProducto[producto]) {
+      document.getElementById("resultado-envio").innerText =
+        "Por favor selecciona una ciudad y un producto válidos.";
+      return;
+    }
+
+    const total = baseCiudad[ciudad] * factorProducto[producto];
+    document.getElementById("resultado-envio").innerText =
+      "💰 Precio estimado de envío: $" + total.toFixed(2);
+  }
+</script>
+

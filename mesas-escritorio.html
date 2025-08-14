@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesas y Escritorios | Oasis</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #232f3e;
+      padding-left: 200px;
+    }
+
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 5px;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 180px;
+      height: 100vh;
+      background-color: #131a22;
+      color: white;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .sidebar ul li a:hover {
+      color: #e47911;
+    }
+
+    .logo {
+      display: block;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .logo img {
+      height: 200px;
+    }
+
+    header {
+      background-color: #232f3e;
+      padding: 10px;
+      text-align: center;
+    }
+
+    header .logo img {
+      height: 200px;
+    }
+
+    .categoria-productos {
+      padding: 40px;
+      background-color: #ffffff;
+      min-height: 100vh;
+    }
+
+    .categoria-productos h1 {
+      margin-bottom: 30px;
+      text-align: center;
+      color: #232f3e;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .producto-item {
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .producto-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .producto-item h3 {
+      color: #232f3e;
+      margin-bottom: 10px;
+    }
+
+    .producto-item p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .boton-naranja {
+      background-color: #e47911;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .boton-naranja:hover {
+      background-color: #ff9900;
+    }
+
+    .volver {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    footer {
+      background-color: #131a22;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      body {
+        padding-left: 0;
+      }
+
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 0;
+      }
+
+      .sidebar ul li {
+        margin: 5px;
+      }
+
+      header .logo img {
+        height: 60px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+      }
+
+      .producto-item img {
+        height: auto;
+        max-height: 220px;
+      }
+
+      .categoria-productos {
+        padding: 20px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div style="text-align: center; margin-bottom: 20px;">
+      <img src="img/logo.png" alt="Oasis Logo" style="height: 60px; max-width: 100%;">
+    </div>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="mesas-de-noche.html">Mesas de Noche</a></li>
+      <li><a href="repisas.html">Repisas</a></li>
+      <li><a href="entretenimiento.html">Centros de Entretenimiento</a></li>
+      <li><a href="pisos.spc.html">Pisos SPC</a></li>
+      <li><a href="plantas.html">Decoración con Plantas</a></li>
+      <li><a href="index.html">Calcula tu Envío</a></li>
+      <li><a href="index.html">Diseño con IA</a></li>
+      <li><a href="index.html">Contacto</a></li>
+    </ul>
+  </aside>
+
+  <header>
+    <a href="index.html" class="logo"><img src="img/logo.png" alt="Oasis Logo"></a>
+  </header>
+
+  <main class="categoria-productos">
+    <h1>Mesas y Escritorios</h1>
+    <div class="grid">
+      <div class="producto-item">
+        <img src="img/escritorio-work-portada.jpg" alt="Work">
+        <h3>Escritorio de trabajo: Work</h3>
+        <p>Fabricado con base resistente y tope ideal para trabajar.</p>
+        <a href="work.html" class="boton-naranja">Ver detalles</a>
+      </div>
+
+      <div class="producto-item">
+        <img src="img/mesa-family-portada.jpg" alt="Family">
+        <h3>Mesa para comedor: Family.</h3>
+        <p>Aéreo. Disponible para 4, 6 u 8 puestos. Los modelos NO incluyen las sillas.</p>
+        <a href="family.html" class="boton-naranja">Ver detalles</a>
+      </div>
+
+      <div class="producto-item">
+        <img src="img/centro-mesa-portada.jpg" alt="Home">
+        <h3>Mesa de centro: Home</h3>
+        <p>Mesa de centro con un estilo moderno e innovador. Disponble en varias combinaciones de colores.</p>
+        <a href="home.html" class="boton-naranja">Ver detalles</a>
+      </div>
+
+      <div class="producto-item">
+        <img src="img/escritorio-repisa-portada.jpg" alt="Luxury">
+        <h3>Escritorio de trabajo con repisas: Luxury.</h3>
+        <p>Escritorio de trabajo con repisas incluidad. Fabricado en base de hierro y tope de MDF Melaminico.</p>
+        <a href="luxury.html" class="boton-naranja">Ver detalles</a>
+      </div>
+
+       <div class="producto-item">
+        <img src="img/mesas-auxiliares.jpg" alt="Wood">
+        <h3>Mesa de centro: Wood.</h3>
+        <p>Mesa de centro con base de hierro y tope de MDF Melaminico.</p>
+        <a href="wood.html" class="boton-naranja">Ver detalles</a>
+      </div>
+    </div>
+
+    <div class="volver">
+      <a href="index.html" class="boton-naranja">Volver al menú principal</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Oasis</p>
+  </footer>
+
+</body>
+</html>
+
+
+
